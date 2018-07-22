@@ -1,0 +1,22 @@
+{
+  "name": "tank-rtc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "signalhub": "signalhub listen -p 3459",
+    "start": "budo --dir public/ src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "signalhub": "^4.9.0",
+    "webrtc-swarm": "^2.9.0"
+  },
+  "devDependencies": {
+    "budo": "^11.3.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1"
+  }
+}
