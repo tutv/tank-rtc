@@ -1,22 +1,15 @@
-const signalhub = require('signalhub')
-const WebRTCSwarm = require('webrtc-swarm')
-
-const hub = signalhub('tank-rtc', [
-    'http://localhost:3459'
-])
-
-const swarm = WebRTCSwarm(hub);
+const swarm = require('./swarm');
+const Players = require('./players');
 
 swarm.on('connect', (peer, id) => {
     console.log('connected');
 
-    swarm.peers.forEach(_peer => {
-        console.log(_peer);
-    });
+    Players.join(id);
 });
 
 swarm.on('disconnect', (peer, id) => {
     console.log('disconnected');
+
+    Players.left(id);
 })
 
-require('./libs/game-play')
