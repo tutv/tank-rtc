@@ -6,8 +6,17 @@ const hub = signalhub('tank-rtc', [
     'http://localhost:3459'
 ])
 
-const swarm = WebRTCSwarm(hub, {
-    uuid: uuid(),
-});
+exports.isSupport = () => {
+    return WebRTCSwarm.WEBRTC_SUPPORT;
+}
 
-module.exports = swarm;
+exports.createSwarm = (options) => {
+    const defaultOpts = {
+        uuid: uuid()
+    };
+
+    const optionsComputed = Object.assign({}, defaultOpts, options);
+    console.log(optionsComputed);
+
+    return WebRTCSwarm(hub, optionsComputed);
+};

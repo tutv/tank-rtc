@@ -1,17 +1,17 @@
-const players = {}
+const Tank = require('./libs/tank');
+const {ENEMY_TYPE, TANK_SPEED} = require('./constants/game')
+
+const _players = new Map();
 
 exports.join = (id, player = {}) => {
-    console.log('A new player has just joined.', id);
+    console.log('Joined.', id)
 
-    players[id] = player;
+    const tank = new Tank(0, 0, TANK_SPEED, ENEMY_TYPE, id)
+
+    _players.set(id, player)
 }
 
 exports.left = (id) => {
-    console.log('A new player has just left.', id);
-
-    players[id] && delete players[id]
+    console.log('Left.', id)
+    _players.get(id) && _players.delete(id)
 }
-
-setInterval(() => {
-    console.log('Players:', Object.keys(players).length);
-}, 5000);

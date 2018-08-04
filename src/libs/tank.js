@@ -1,4 +1,9 @@
 const Bullet = require('./bullet');
+const {
+    image_up_player_up_1, image_up_player_up_2, image_up_player_up_3, image_up_player_up_4,
+    image_up_enemy_up_1, image_up_enemy_up_2, image_up_enemy_up_3, image_up_enemy_up_4
+} = require("./utils")
+const {TANK_SIZE, BULLET_SIZE, BULLET_SPEED} = require('../constants/game')
 
 class Tank {
     constructor(x, y, speed, type, uid) {
@@ -13,7 +18,7 @@ class Tank {
         this.isRevenge = false
         this.isAlive = true
 
-        this.size = tankSize
+        this.size = TANK_SIZE
         this.name = ""
 
         this.image_up = new Image()
@@ -88,7 +93,7 @@ class Tank {
     }
 
     shoot() {
-        return new Bullet(this.x + tankSize / 2 - bulletSize / 2, this.y + tankSize / 2 - bulletSize / 2, this.currOrient, bulletSpeed, this.type, bulletSize, this.uid)
+        return new Bullet(this.x + TANK_SIZE / 2 - BULLET_SIZE / 2, this.y + TANK_SIZE / 2 - BULLET_SIZE / 2, this.currOrient, BULLET_SPEED, this.type, BULLET_SIZE, this.uid)
     }
 
     isInside(objX, objY, objSize) {
@@ -107,15 +112,12 @@ class Tank {
         if (this.isPointInside(xLeft, yBottom)) {
             return true
         }
-        if (this.isPointInside(xRight, yBottom)) {
-            return true
-        }
 
-        return false
+        return this.isPointInside(xRight, yBottom)
     }
 
     isPointInside(objX, objY) {
-        return objX > this.x && objX < (this.x + tankSize) && objY > this.y && objY < (this.y + tankSize)
+        return objX > this.x && objX < (this.x + TANK_SIZE) && objY > this.y && objY < (this.y + TANK_SIZE)
     }
 }
 
